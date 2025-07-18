@@ -1,0 +1,323 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap"); /* New font imports */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --accent-color: #5d3fd3;
+  --base-color: #f2f4f8;
+  --surface-color: #fff;
+  --text-color: #191b23;
+  --secondary-text-color: #3c404f;
+  --base-transparent-90: rgba(247, 247, 247, 0.9);
+  --base-transparent-100: rgba(247, 247, 247, 1);
+}
+
+.dark-theme {
+  --base-color: #1e1f26;
+  --surface-color: #2c2f38;
+  --text-color: #f0f0f0;
+  --secondary-text-color: #b0b3c0;
+  --base-transparent-90: rgba(30, 31, 38, 0.9);
+  --base-transparent-100: rgba(30, 31, 38, 1);
+}
+
+body {
+  font-family: Noto Sans Mono, monospace;
+  margin: 2rem;
+  background: var(--base-color);
+  color: var(--text-color);
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items vertically in the center */
+  margin-bottom: 2rem;
+}
+
+/* Add this new style for the div containing the buttons and color picker */
+header > div {
+  display: flex;
+  align-items: center; /* Align items vertically in the center within this div */
+  gap: 1rem; /* Add some space between items */
+}
+
+.add-note-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.3em;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.add-note-btn:hover {
+  background: var(--accent-color);
+}
+
+.theme-toggle-btn {
+  background: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--surface-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.3em;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  /* Remove margin-left: 1rem; as gap will handle spacing */
+}
+
+.theme-toggle-btn:hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* Color picker styling */
+.color-picker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 45px; /* Adjust width as needed */
+  height: 45px; /* Adjust height as needed */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  /* Remove margin-right: 10px; as gap will handle spacing */
+}
+
+.color-picker::-webkit-color-swatch {
+  border-radius: 50%;
+  border: 2px solid var(--text-color);
+}
+
+.color-picker::-moz-color-swatch {
+  border-radius: 50%;
+  border: 2px solid var(--text-color);
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.note-card {
+  background: var(--surface-color);
+  border-radius: 0.3em;
+  padding: 0.5rem;
+  border: 1px solid var(--surface-color);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.note-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.note-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  word-wrap: break-word;
+}
+
+.note-content {
+  color: var(--secondary-text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.note-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.note-card:hover .note-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 0.3em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  background: var(--base-transparent-90);
+  color: var(--text-color);
+  border: 1px solid var(--surface-color);
+}
+
+.edit-btn:hover {
+  background: var(--base-transparent-100);
+  transform: scale(1.05);
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+  transform: scale(1.05);
+  color: white;
+}
+
+dialog {
+  margin: auto;
+  inset: 0;
+  border: none;
+  border-radius: 0.3em;
+  padding: 0;
+  background: var(--surface-color);
+  color: var(--text-color);
+  max-width: 500px;
+  width: 90vw;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-content {
+  padding: 2rem;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  padding: 0.25rem;
+  border-radius: 0.3em;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: var(--surface-color);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--surface-color);
+  border-radius: 0.3em;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  background: var(--base-color);
+  color: var(--text-color);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.3em;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn {
+  background: var(--base-color);
+  color: var(--text-color);
+}
+
+.save-btn {
+  background: var(--accent-color);
+  color: white;
+}
+
+.save-btn:hover {
+  background: var(--accent-color);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--secondary-text-color);
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}

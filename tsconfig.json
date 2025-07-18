@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2015", // Or "es6", "es2017", "esnext", etc.
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["app.ts"], // Make sure your app.ts is included
+  "exclude": ["node_modules"]
+}
