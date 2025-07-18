@@ -1,6 +1,6 @@
 # Quick Notes
 
-Web based application for dotting down simple notes
+Web-based application for jotting down simple notes.
 
 * Create New Notes: Easily add new notes with a title and content
 * Edit Existing Notes: Modify the title and content of your notes at any time
